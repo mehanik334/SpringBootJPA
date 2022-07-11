@@ -11,4 +11,5 @@ public class User {
     private String email;
     private List<Book> bookList;
     private List<Event> eventList;
+
 }
