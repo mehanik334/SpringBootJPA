@@ -1,0 +1,35 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-book-table
+      author: Oleksandr
+      changes:
+        - createTable:
+            tableName: book
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: author
+                  type: varchar(255)
+              - column:
+                  name: genre
+                  type: varchar(255)
+              - column:
+                  name: price
+                  type: double
+              - column:
+                  name: title
+                  type: varchar(255)
+              - column:
+                  name: user_id
+                  type: int
+                  constraints:
+                    foreignKeyName: fk_book_user
+                    references: user(id)
+                    nullable: false
+

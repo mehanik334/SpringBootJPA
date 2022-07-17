@@ -1,0 +1,22 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-data-to-user
+      author: Oleksandr
+      changes:
+        - insert:
+            columns:
+              - column:
+                  name: email
+                  value: qwerty@gmaol.com
+              - column:
+                  name: first_name
+                  value: Sasha
+              - column:
+                  name: last_name
+                  value: Denisenko
+              - column:
+                  name: login
+                  value: qwerty
+            schemaName: bookshelf
+            tableName: user
+

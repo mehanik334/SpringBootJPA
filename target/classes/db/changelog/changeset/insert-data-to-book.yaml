@@ -1,0 +1,25 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-data-to-book
+      author: Oleksandr
+      changes:
+        - insert:
+            columns:
+              - column:
+                  name: author
+                  value: T.G.Shevchenko
+              - column:
+                  name: genre
+                  value: poem
+              - column:
+                  name: price
+                  valueNumeric: 4.44
+              - column:
+                  name: title
+                  value: Kobzar
+              - column:
+                  name: user_id
+                  valueNumeric: 1
+            schemaName: bookshelf
+            tableName: book
+
