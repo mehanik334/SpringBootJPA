@@ -8,13 +8,18 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
 
+    private final UserRepository userRepository;
+
     @Autowired
-    private UserRepository userRepository;
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public User createUser(User user) {
@@ -23,7 +28,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findById(Integer id) {
-        return userRepository.findById(id).get();
+        Optional<User> optionalUser = userRepository.findById(id);
+        User user = null;
+        if(optionalUser.isPresent()) {
+            user = optionalUser.get();
+        }else {
+            throw new RuntimeException("User with id " + id + " not found");
+        }
+        return user;
     }
 
     @Override

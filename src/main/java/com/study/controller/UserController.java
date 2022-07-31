@@ -42,14 +42,18 @@ public class UserController {
         return "redirect:/";
     }
 
-    @GetMapping("/id")
-    public ResponseEntity<User> getUserByID(@PathVariable(name = "id") Integer id) {
+    @GetMapping("/formForUpdateUser/{id}")
+    public String showFormForUpdateUser(@PathVariable(value = "id") Integer id, Model model) {
         User user = userService.findById(id);
-        if(user == null) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
 
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        model.addAttribute("user", user);
+        return "updateUser";
+    }
+
+    @GetMapping("/deleteUser")
+    public String deleteUser(@PathVariable(value = "id") Integer id) {
+        userService.deleteUser(id);
+        return "redirect:/";
     }
 
 

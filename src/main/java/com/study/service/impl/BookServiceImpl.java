@@ -8,13 +8,18 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
 public class BookServiceImpl implements BookService {
 
+    private final BookRepository bookRepository;
+
     @Autowired
-    private BookRepository bookRepository;
+    public BookServiceImpl(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
+    }
 
     @Override
     public Book createBook(Book book) {
@@ -23,7 +28,14 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book findById(Integer id) {
-        return bookRepository.findById(id).get();
+        Optional<Book> optionalBook = bookRepository.findById(id);
+        Book book = null;
+        if(optionalBook.isPresent()) {
+            book = optionalBook.get();
+        }else {
+            throw new RuntimeException("Book with id " + id + " not found");
+        }
+        return book;
     }
 
     @Override
